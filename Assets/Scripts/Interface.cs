@@ -14,3 +14,8 @@ public interface IState
     public void StateExit();
     public void StateUpdate();
 }
+
+public interface IBuyable
+{
+
+}
