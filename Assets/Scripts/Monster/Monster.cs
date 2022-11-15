@@ -35,7 +35,6 @@ public class Monster : MonoBehaviour, IHasStatable
         attackState = new AttackState(this);
         dieState = new DieState(this);
         traceState = new TraceState(this);
-
         SetState(idleState);
     }
 
