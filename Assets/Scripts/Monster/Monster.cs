@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour, IHasStatable
+public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
 {
     protected IState currentState;
     protected IState idleState;
     protected IState traceState;
     protected IState attackState;
     protected IState dieState;
+    public MONSTER_TYPE monsterType;
+    public ObjectPool home { get ; set; }
 
     private float hp;
     public float HP
@@ -23,6 +25,7 @@ public class Monster : MonoBehaviour, IHasStatable
             }
         }
     }
+
 
     public object GetObj()
     {
@@ -49,5 +52,10 @@ public class Monster : MonoBehaviour, IHasStatable
             currentState.StateExit();
         currentState = inputState;
         currentState.StateEnter();
+    }
+
+    public void Grab()
+    {
+        
     }
 }

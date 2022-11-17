@@ -6,15 +6,17 @@ public class Ground : MonoBehaviour
 {
     public bool isPlayerGround;
     private bool isSelected = false;
+    public bool filledMonster = false;
     public GameObject tile;
-
+    private MONSTER_TYPE monsterType;
     private void Awake()
     {
         if (isPlayerGround)
-            GameManager.Instance.groundAction += Select;
+            GroundManager.Instance.groundAction += ShowTile;
     }
 
-    public void Select()
+    //몬스터가 선택되었을 때 놓을 수 있는 위치 보여주기
+    public void ShowTile()
     {
         if (!isSelected)
         {
@@ -28,4 +30,14 @@ public class Ground : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        filledMonster = true;
+        //FindMonster(other.GetComponent<MONSTER_TYPE>()); 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        filledMonster = false;
+    }
 }

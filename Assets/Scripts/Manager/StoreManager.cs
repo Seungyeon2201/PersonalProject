@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StoreManager : MonoBehaviour
+using UnityEngine.UI;
+public class StoreManager : Singleton<StoreManager>
 {
     [Header("Re-Roll Probability")]
     [Range(0,100)]
@@ -13,6 +13,20 @@ public class StoreManager : MonoBehaviour
     public float threeCost;
 
     private List<float> percentage = new List<float>();
+    private List<ScriptableObject> pickMonsterList = new List<ScriptableObject>();
 
-   
+    private void Awake()
+    {
+        ReRollMonster();
+    }
+
+    //MonsterManager에 있는 ScriptableObject의 개수에서 랜덤으로 5개(상점에 나타나는 기물 개수)
+    public void ReRollMonster()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int ran = Random.Range(0, MonsterManager.Instance.scriptableObjects.Count);
+            UIManager.Instance.StoreShowInfo(MonsterManager.Instance.scriptableObjects[ran]);
+        }
+    }
 }
