@@ -18,6 +18,7 @@ public class StoreManager : Singleton<StoreManager>
     private void Awake()
     {
         ReRollMonster();
+        Debug.Log("테스트 중입니다.");
     }
 
     //MonsterManager에 있는 ScriptableObject의 개수에서 랜덤으로 5개(상점에 나타나는 기물 개수)
