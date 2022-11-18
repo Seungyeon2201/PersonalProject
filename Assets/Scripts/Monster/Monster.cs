@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
     protected IState dieState;
     public MONSTER_TYPE monsterType;
     public ObjectPool home { get ; set; }
-
+    public int upgradeCount = 1;
     private float hp;
     public float HP
     {
@@ -54,8 +54,4 @@ public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
         currentState.StateEnter();
     }
 
-    public void Grab()
-    {
-        
-    }
 }

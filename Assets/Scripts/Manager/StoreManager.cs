@@ -29,4 +29,6 @@ public class StoreManager : Singleton<StoreManager>
             UIManager.Instance.StoreShowInfo(MonsterManager.Instance.scriptableObjects[ran]);
         }
     }
+
+    //팔때 1성으로 되돌려서 풀에 집어넣기
 }

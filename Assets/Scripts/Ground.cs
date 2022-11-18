@@ -33,7 +33,6 @@ public class Ground : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         filledMonster = true;
-        //FindMonster(other.GetComponent<MONSTER_TYPE>()); 
     }
 
     private void OnTriggerExit(Collider other)

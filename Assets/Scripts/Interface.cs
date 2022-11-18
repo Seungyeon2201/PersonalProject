@@ -17,7 +17,6 @@ public interface IState
 
 public interface IGrabable
 {
-    public void Grab();
 }
 
 public interface IPoolingable

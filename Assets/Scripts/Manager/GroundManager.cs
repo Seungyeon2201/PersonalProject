@@ -29,7 +29,7 @@ public class GroundManager : Singleton<GroundManager>
         return grounds[0].transform.position;
     }
 
-    public Vector3 FindSameMonster(MONSTER_TYPE mONSTER_TYPE)
+    public Vector3 ReturnMonster(MONSTER_TYPE monsterTYPE, int upgradeCount)
     {
         int index = -1;
         for (int i = 0; i < grounds.Length; i++)
@@ -37,15 +37,19 @@ public class GroundManager : Singleton<GroundManager>
             RaycastHit hit;
             if (Physics.Raycast(grounds[i].transform.position, grounds[i].transform.up, out hit, 10f))
             {
-                if (hit.transform.GetComponent<Monster>().monsterType == mONSTER_TYPE)
+                Monster monster = hit.transform.GetComponent<Monster>();
+                if (hit.transform.GetComponent<Monster>().monsterType == monsterTYPE)
                 {
-                    hit.transform.GetComponent<Monster>().home.Return(hit.transform.gameObject);
-                    grounds[i].filledMonster = false;
-                    if (index < 0)
+                    if(hit.transform.GetComponent<Monster>().upgradeCount == upgradeCount)
+                    {
+                        MonsterManager.Instance.ReturnPool(hit.transform.gameObject);
+                        grounds[i].filledMonster = false;
+                        if(index < 0)
                         index = i;
+                    }
                 }
             }
         }
-        return grounds[index].transform.position;
+        return grounds[index].transform.position + new Vector3(0, 1f, 0);
     }
 }
