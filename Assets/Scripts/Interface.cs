@@ -15,7 +15,11 @@ public interface IState
     public void StateUpdate();
 }
 
-public interface IBuyable
+public interface IGrabable
 {
+}
 
+public interface IPoolingable
+{
+    public ObjectPool home { get; set; }
 }

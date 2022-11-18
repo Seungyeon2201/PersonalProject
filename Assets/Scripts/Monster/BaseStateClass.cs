@@ -36,7 +36,7 @@ public class IDleState : BaseState
 
     public override void StateUpdate()
     {
-        Debug.Log("대기 중");
+        //Debug.Log("대기 중");
         //스테이지 시작되면 TraceState로 상태 변환
     }
 }

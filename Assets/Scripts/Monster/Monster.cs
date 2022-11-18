@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour, IHasStatable
+public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
 {
     protected IState currentState;
     protected IState idleState;
     protected IState traceState;
     protected IState attackState;
     protected IState dieState;
-
+    public MONSTER_TYPE monsterType;
+    public ObjectPool home { get ; set; }
+    public int upgradeCount = 1;
     private float hp;
     public float HP
     {
@@ -24,6 +26,7 @@ public class Monster : MonoBehaviour, IHasStatable
         }
     }
 
+
     public object GetObj()
     {
         return this; //박싱 - 언박싱을 위해
@@ -35,7 +38,6 @@ public class Monster : MonoBehaviour, IHasStatable
         attackState = new AttackState(this);
         dieState = new DieState(this);
         traceState = new TraceState(this);
-
         SetState(idleState);
     }
 
@@ -51,4 +53,5 @@ public class Monster : MonoBehaviour, IHasStatable
         currentState = inputState;
         currentState.StateEnter();
     }
+
 }
