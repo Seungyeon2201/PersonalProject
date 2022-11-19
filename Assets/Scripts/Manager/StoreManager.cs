@@ -44,7 +44,6 @@ public class StoreManager : Singleton<StoreManager>
                 typeToCount.Add(monsterScriptable[i].monsterType, 9);
             }
         }
-        
         StoreLevelUpAction += StoreLevelUp;
         StoreLevelUpAction();
     }
@@ -62,7 +61,7 @@ public class StoreManager : Singleton<StoreManager>
         {
             int ran = Random.Range(0, 100);
             if (ran < oneCost) pickCostType = COST_TYPE.One;
-            else if (ran < twoCost) pickCostType = COST_TYPE.Two;
+            else if (ran < oneCost + twoCost) pickCostType = COST_TYPE.Two;
             else pickCostType = COST_TYPE.Three;
             PickMonster(pickCostType);
         }
@@ -80,6 +79,7 @@ public class StoreManager : Singleton<StoreManager>
         oneCost = storeProbability[storeLevel - 1].OneCost;
         twoCost = storeProbability[storeLevel - 1].TwoCost;
         threeCost = 100 - oneCost - twoCost;
+        Debug.Log(oneCost + "/" + twoCost + "/" + threeCost);
     }
 
     //Cost Type내에 있는 몬스터의 종류를 찾고 기물의 개수를 비교하여 랜덤으로 뽑기
@@ -125,6 +125,16 @@ public class StoreManager : Singleton<StoreManager>
         sellMonster = monsterObject.GetComponent<Monster>();
         float floatUpgradeCount = sellMonster.upgradeCount;
         typeToCount[sellMonster.monsterType] += (int)Mathf.Pow(3f, (floatUpgradeCount - 1));
+
+        //MonsterManager가 가지고 있는 기물 정보에 관한 Dictionary 갱신
+        if(sellMonster.upgradeCount == 1)
+        {
+            MonsterManager.Instance.monsterCountDic[sellMonster.monsterType]--;
+        }
+        else if (sellMonster.upgradeCount == 2)
+        {
+            MonsterManager.Instance.monsterStarDic[sellMonster.monsterType]--;
+        }
         MonsterManager.Instance.ReturnPool(monsterObject);
     }
 }

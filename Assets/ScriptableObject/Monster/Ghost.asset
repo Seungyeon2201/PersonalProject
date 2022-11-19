@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da028f3f1eb7470e8b6ae58a80ffae6, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  cost: 0
+  cost: 1
   monsterType: 1
   monsterprefab: {fileID: 3638045700264670868, guid: ba1fdcc0a73a9452cb6629a8f6efc9dc, type: 3}
-  index: 2
   monsterName: Ghost
