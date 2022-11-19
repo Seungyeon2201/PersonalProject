@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ButtonFunc : MonoBehaviour
 {
-    public Monsters monsters;
+    public MONSTER_TYPE monsterType;
 
     public void Buy()
     {
-        MonsterManager.Instance.SummonMonster(monsters, GroundManager.Instance.FindBlank() + new Vector3(0f, 1f, 0f));
+        StoreManager.Instance.BuyMonster(monsterType);
     }
 }
