@@ -24,11 +24,12 @@ public class MonsterManager : Singleton<MonsterManager>
         }
     }
 
-    //몬스터 소환
-    public Transform SummonMonster(Monsters monsters, Vector3 position)
+    //1성 몬스터 소환
+    public Transform SummonMonster(Monsters monsters)
     {
         if (!monsterDic.ContainsKey(monsters.monsterType)) return this.transform;
         monsterPool = monsterDic[monsters.monsterType];
+        Vector3 position = GroundManager.Instance.FindBlank() + new Vector3(0f, 1f, 0f);
         monsterPool.Call(position).TryGetComponent(out Monster monster);
         monsterCountDic[monsters.monsterType]++;
         if(monsterCountDic[monsters.monsterType] == 3)
@@ -38,7 +39,7 @@ public class MonsterManager : Singleton<MonsterManager>
         }
         return monster.transform;
     }
-
+    //2성 몬스터 소환
     public void UpgradeMonster(MONSTER_TYPE monsterType, Vector3 position)
     {
         Transform transform = monsterPool.Call(position);
@@ -55,7 +56,7 @@ public class MonsterManager : Singleton<MonsterManager>
         }
 
     }
-
+    //3성 몬스터 소환
     public void UpgradeFinalMonster(MONSTER_TYPE monsterType, Vector3 position)
     {
         Transform transform = monsterPool.Call(position);
@@ -64,6 +65,7 @@ public class MonsterManager : Singleton<MonsterManager>
         transform.GetChild(2).gameObject.SetActive(true);
     }
 
+    //오브젝트풀에 몬스터 리턴
     public void ReturnPool(GameObject gameObject)
     {
         for(int i = 0; i < 3; i++)

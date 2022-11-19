@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 348090386706026016}
   - component: {fileID: 2055030110475298541}
   - component: {fileID: 8663625819990394529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterType: 1
+  upgradeCount: 1
 --- !u!1001 &1519288727693490273
 PrefabInstance:
   m_ObjectHideFlags: 0

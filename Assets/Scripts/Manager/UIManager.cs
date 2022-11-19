@@ -8,10 +8,12 @@ public class UIManager : Singleton<UIManager>
     public List<TextMeshProUGUI> storeMonsterName = new List<TextMeshProUGUI>();
     public List<ButtonFunc> buttonMonsters = new List<ButtonFunc>();
 
+
+    //상점 정보 보여주기
     public void StoreShowInfo(Monsters monster)
     {
         storeMonsterName[index].text = monster.MonsterName;
-        buttonMonsters[index].monsters = monster;
+        buttonMonsters[index].monsterType = monster.monsterType;
         index++;
         if(index > 4)
         {

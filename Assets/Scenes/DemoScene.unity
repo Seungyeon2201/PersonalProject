@@ -1392,9 +1392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55a52ee83a6d40cc8e32b81f6c891f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneCost: 50
-  twoCost: 30
-  threeCost: 20
+  storeProbability:
+  - {fileID: 11400000, guid: 4bd281ffb2b914828ac017f0096ce223, type: 2}
+  - {fileID: 11400000, guid: f6453cd24ca854ae7b54cb9a8b7e0a1d, type: 2}
+  - {fileID: 11400000, guid: e3a63679b521d4362a3eb2eb92869b79, type: 2}
 --- !u!4 &647266808
 Transform:
   m_ObjectHideFlags: 0
@@ -3729,6 +3730,7 @@ MonoBehaviour:
   scriptableObjects:
   - {fileID: 11400000, guid: 119a6eb9e6a3b4d0c9b81a76e8e8876a, type: 2}
   - {fileID: 11400000, guid: e0d85dcda311e461599ca49f526ed8d8, type: 2}
+  - {fileID: 11400000, guid: fcfef49325fe741668abb7bc842c5627, type: 2}
 --- !u!4 &1564688624
 Transform:
   m_ObjectHideFlags: 0

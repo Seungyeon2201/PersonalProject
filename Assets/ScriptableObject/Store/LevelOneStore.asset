@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da028f3f1eb7470e8b6ae58a80ffae6, type: 3}
-  m_Name: Bat
+  m_Script: {fileID: 11500000, guid: 467acdf1d3b2b4ca484c232ec7e9797e, type: 3}
+  m_Name: LevelOneStore
   m_EditorClassIdentifier: 
-  cost: 1
-  monsterType: 0
-  monsterprefab: {fileID: 3656633084182517875, guid: 31cc18b8868a940d19e9984044b76b8f, type: 3}
-  monsterName: Bat
+  oneCost: 100
+  twoCost: 0
