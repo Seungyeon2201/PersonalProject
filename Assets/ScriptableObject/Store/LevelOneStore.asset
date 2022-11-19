@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467acdf1d3b2b4ca484c232ec7e9797e, type: 3}
   m_Name: LevelOneStore
   m_EditorClassIdentifier: 
-  oneCost: 100
-  twoCost: 0
+  oneCost: 33
+  twoCost: 33
