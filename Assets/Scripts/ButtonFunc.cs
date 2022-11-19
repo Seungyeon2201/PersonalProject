@@ -20,6 +20,7 @@ public class ButtonFunc : MonoBehaviour
     public void Sell()
     {
         Grabber.Instance.ClickForSell();
+        Debug.Log("Test");
     }
     public void OnInteractable()
     {
