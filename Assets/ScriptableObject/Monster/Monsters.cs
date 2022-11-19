@@ -19,7 +19,6 @@ public class Monsters : ScriptableObject
     public COST_TYPE cost;
     public MONSTER_TYPE monsterType;
     public GameObject monsterprefab;
-    public int index;
     [SerializeField] private string monsterName;
     public string MonsterName { get { return monsterName; } }
 }
