@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterType: 0
+  upgradeCount: 1
 --- !u!1001 &3656633083869820037
 PrefabInstance:
   m_ObjectHideFlags: 0

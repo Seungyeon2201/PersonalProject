@@ -10,6 +10,8 @@ public class Grabber : Singleton<Grabber>
     public GameObject selectedObject;
     private int groundLayer;
     private int sellButtonLayer;
+    private Vector3 offSetHight = new Vector3(0f, 1f, 0f);
+    public Vector3 SelectPosition;
 
     private void Awake()
     {
@@ -30,25 +32,35 @@ public class Grabber : Singleton<Grabber>
             //마우스로 몬스터를 집을 때
             if (selectedObject == null)
             {
-                Transform firstPosition;
                 hit = GrabRay();
                 if (!hit.transform.TryGetComponent(out IGrabable grabable)) return;
                 selectedObject = hit.collider.gameObject;
-                firstPosition = selectedObject.transform;
+                SelectPosition = selectedObject.transform.position;
                 GroundManager.Instance.Select(); //밑에 타일 띄우기
                 Cursor.visible = false;
             }
             //마우스로 몬스터를 놓을 때
             else
             {   //놓을려는 장소의 layer가 ground이면서 playerground이고 몬스터가 채워져 있지 않을 때 몬스터롤 놓을 수 있다.
-                if (Physics.Raycast(selectedObject.transform.position, selectedObject.transform.up * -1f, out hit, Mathf.Infinity))
+                if (Physics.Raycast(selectedObject.transform.position, selectedObject.transform.up * -1f, out hit, 10f))
                 {
-                    if (hit.transform.gameObject.layer == groundLayer && hit.transform.GetComponent<Ground>().isPlayerGround && !hit.transform.GetComponent<Ground>().filledMonster)
+                    if (hit.transform.gameObject.layer == groundLayer && hit.transform.GetComponent<Ground>().isPlayerGround)
                     {
-                        selectedObject.transform.position = hit.collider.transform.position + new Vector3(0, 1, 0);
-                        selectedObject = null;
-                        GroundManager.Instance.Select();
-                        Cursor.visible = true;
+                        if(!hit.transform.GetComponent<Ground>().filledMonster)
+                        {
+                            selectedObject.transform.position = hit.transform.position + offSetHight;
+                            selectedObject = null;
+                            GroundManager.Instance.Select();
+                            Cursor.visible = true;
+                        }
+                        else
+                        {
+                            hit.transform.GetComponent<Ground>().ChangePosition(SelectPosition);
+                            selectedObject.transform.position = hit.collider.transform.position + offSetHight;
+                            selectedObject = null;
+                            GroundManager.Instance.Select();
+                            Cursor.visible = true;
+                        }    
                     }
                 }
 
@@ -82,7 +94,7 @@ public class Grabber : Singleton<Grabber>
     {
         if (selectedObject == null) return;
         StoreManager.Instance.SellMonster(selectedObject);
-        GroundManager.Instance.groundAction(); //선택했을 때 타일 끄기
+        GroundManager.Instance.Select(); //선택했을 때 타일 끄기
         Cursor.visible = true;
         selectedObject = null;
     }

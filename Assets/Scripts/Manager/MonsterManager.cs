@@ -29,7 +29,7 @@ public class MonsterManager : Singleton<MonsterManager>
     {
         if (!monsterDic.ContainsKey(monsters.monsterType)) return this.transform;
         monsterPool = monsterDic[monsters.monsterType];
-        Vector3 position = GroundManager.Instance.FindBlank() + new Vector3(0f, 1f, 0f);
+        Vector3 position = GroundManager.Instance.FindBlank();
         monsterPool.Call(position).TryGetComponent(out Monster monster);
         monsterCountDic[monsters.monsterType]++;
         if(monsterCountDic[monsters.monsterType] == 3)

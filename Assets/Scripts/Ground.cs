@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    public bool isPlayerGround;
     private bool isSelected = false;
+    public bool isPlayerGround;
     public bool filledMonster = false;
     public GameObject tile;
-    private MONSTER_TYPE monsterType;
+    public Transform monsterTran;
     private void Awake()
     {
         if (isPlayerGround)
@@ -32,11 +32,18 @@ public class Ground : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        monsterTran = other.gameObject.transform;
         filledMonster = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         filledMonster = false;
+    }
+
+    public void ChangePosition(Vector3 selectPosition)
+    {
+        monsterTran.position = selectPosition;
+        //monsterGameObj.transform.position = selectTransform.position;
     }
 }

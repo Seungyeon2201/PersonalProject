@@ -8,8 +8,7 @@ public class GroundManager : Singleton<GroundManager>
 {
     public UnityAction groundAction;
     public Ground[] grounds;
-    
-    
+    private Vector3 offSetHight = new Vector3 (0f, 1f, 0f);
 
     public void Select()
     {
@@ -23,10 +22,10 @@ public class GroundManager : Singleton<GroundManager>
             int index = i;
             if (grounds[i].filledMonster == false)
             {
-                return grounds[i].transform.position;
+                return grounds[i].transform.position + offSetHight;
             }
         }
-        return grounds[0].transform.position;
+        return grounds[0].transform.position + offSetHight;
     }
 
     public Vector3 ReturnMonster(MONSTER_TYPE monsterTYPE, int upgradeCount)
@@ -50,6 +49,7 @@ public class GroundManager : Singleton<GroundManager>
                 }
             }
         }
-        return grounds[index].transform.position + new Vector3(0, 1f, 0);
+        Debug.Log(index);
+        return grounds[index].transform.position + offSetHight;
     }
 }
