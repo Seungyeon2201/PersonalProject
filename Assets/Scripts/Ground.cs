@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     private bool isSelected = false;
-    public bool isPlayerGround;
     public bool filledMonster = false;
+    public bool isPlayerGround;
     public GameObject tile;
     public Transform monsterTran;
     private void Awake()
@@ -44,5 +44,10 @@ public class Ground : MonoBehaviour
     public void ChangePosition(Vector3 selectPosition)
     {
         monsterTran.position = selectPosition;
+    }
+
+    public void ChangeTile()
+    {
+
     }
 }
