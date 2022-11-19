@@ -37,7 +37,6 @@ public class Grabber : Singleton<Grabber>
                 selectedObject = hit.collider.gameObject;
                 SelectPosition = selectedObject.transform.position;
                 GroundManager.Instance.Select(); //밑에 타일 띄우기
-                Cursor.visible = false;
             }
             //마우스로 몬스터를 놓을 때
             else
@@ -51,7 +50,6 @@ public class Grabber : Singleton<Grabber>
                             selectedObject.transform.position = hit.transform.position + offSetHight;
                             selectedObject = null;
                             GroundManager.Instance.Select();
-                            Cursor.visible = true;
                         }
                         else
                         {
@@ -59,7 +57,6 @@ public class Grabber : Singleton<Grabber>
                             selectedObject.transform.position = hit.collider.transform.position + offSetHight;
                             selectedObject = null;
                             GroundManager.Instance.Select();
-                            Cursor.visible = true;
                         }    
                     }
                 }
@@ -95,7 +92,6 @@ public class Grabber : Singleton<Grabber>
         if (selectedObject == null) return;
         StoreManager.Instance.SellMonster(selectedObject);
         GroundManager.Instance.Select(); //선택했을 때 타일 끄기
-        Cursor.visible = true;
         selectedObject = null;
     }
 }

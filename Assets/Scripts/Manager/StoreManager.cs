@@ -125,6 +125,16 @@ public class StoreManager : Singleton<StoreManager>
         sellMonster = monsterObject.GetComponent<Monster>();
         float floatUpgradeCount = sellMonster.upgradeCount;
         typeToCount[sellMonster.monsterType] += (int)Mathf.Pow(3f, (floatUpgradeCount - 1));
+
+        //MonsterManager가 가지고 있는 기물 정보에 관한 Dictionary 갱신
+        if(sellMonster.upgradeCount == 1)
+        {
+            MonsterManager.Instance.monsterCountDic[sellMonster.monsterType]--;
+        }
+        else if (sellMonster.upgradeCount == 2)
+        {
+            MonsterManager.Instance.monsterStarDic[sellMonster.monsterType]--;
+        }
         MonsterManager.Instance.ReturnPool(monsterObject);
     }
 }

@@ -44,6 +44,5 @@ public class Ground : MonoBehaviour
     public void ChangePosition(Vector3 selectPosition)
     {
         monsterTran.position = selectPosition;
-        //monsterGameObj.transform.position = selectTransform.position;
     }
 }
