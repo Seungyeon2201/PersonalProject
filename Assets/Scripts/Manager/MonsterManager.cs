@@ -77,9 +77,3 @@ public class MonsterManager : Singleton<MonsterManager>
         gameObject.GetComponent<Monster>().home.Return(gameObject);
     }
 }
-/*
- 몬스터소환 요청 -> 일단 소환
-소환할 때 몬스터 카운트딕셔너리 ++
-3마리 되면 3마리 다 리턴 시키고 몬스터 카운트 0 한마리 소환하면서 첫번째 자식 끄고 두번째 자식 활성화
-별 개수 증가
- */
