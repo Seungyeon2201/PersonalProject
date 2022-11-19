@@ -30,7 +30,7 @@ public class MonsterManager : Singleton<MonsterManager>
         if (!monsterDic.ContainsKey(monsters.monsterType)) return this.transform;
         monsterPool = monsterDic[monsters.monsterType];
         Vector3 position = GroundManager.Instance.FindBlank();
-        monsterPool.Call(position).TryGetComponent(out Monster monster);
+        monsterPool.Call(position, Quaternion.Euler(0, 180, 0)).TryGetComponent(out Monster monster);
         monsterCountDic[monsters.monsterType]++;
         if(monsterCountDic[monsters.monsterType] == 3)
         {
@@ -42,7 +42,7 @@ public class MonsterManager : Singleton<MonsterManager>
     //2성 몬스터 소환
     public void UpgradeMonster(MONSTER_TYPE monsterType, Vector3 position)
     {
-        Transform transform = monsterPool.Call(position);
+        Transform transform = monsterPool.Call(position, Quaternion.Euler(0, 180, 0));
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
         transform.GetComponent<Monster>().upgradeCount++;
@@ -59,7 +59,7 @@ public class MonsterManager : Singleton<MonsterManager>
     //3성 몬스터 소환
     public void UpgradeFinalMonster(MONSTER_TYPE monsterType, Vector3 position)
     {
-        Transform transform = monsterPool.Call(position);
+        Transform transform = monsterPool.Call(position, Quaternion.Euler(0, 180, 0));
         transform.GetComponent<Monster>().upgradeCount = 3;
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(2).gameObject.SetActive(true);
