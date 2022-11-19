@@ -9,14 +9,12 @@ public class Grabber : Singleton<Grabber>
 
     public GameObject selectedObject;
     private int groundLayer;
-    private int sellButtonLayer;
     private Vector3 offSetHight = new Vector3(0f, 1f, 0f);
     public Vector3 SelectPosition;
 
     private void Awake()
     {
         groundLayer = 6;
-        sellButtonLayer = 7;
     }
     private void Update()
     {
