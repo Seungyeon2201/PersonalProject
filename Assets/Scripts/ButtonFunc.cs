@@ -17,6 +17,10 @@ public class ButtonFunc : MonoBehaviour
         button.interactable = false;
     }
 
+    public void Sell()
+    {
+        Grabber.Instance.ClickForSell();
+    }
     public void OnInteractable()
     {
         button.interactable = true;
