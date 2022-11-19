@@ -311,7 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df206d82b00d341b18a9ad0d3e21a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: {fileID: 0}
+  monsterType: 0
+  button: {fileID: 0}
 --- !u!114 &114242586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,7 +1199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df206d82b00d341b18a9ad0d3e21a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: {fileID: 0}
+  monsterType: 0
+  button: {fileID: 0}
 --- !u!114 &462611888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1396,6 +1398,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4bd281ffb2b914828ac017f0096ce223, type: 2}
   - {fileID: 11400000, guid: f6453cd24ca854ae7b54cb9a8b7e0a1d, type: 2}
   - {fileID: 11400000, guid: e3a63679b521d4362a3eb2eb92869b79, type: 2}
+  monsterScriptable: []
 --- !u!4 &647266808
 Transform:
   m_ObjectHideFlags: 0
@@ -2666,7 +2669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df206d82b00d341b18a9ad0d3e21a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: {fileID: 0}
+  monsterType: 0
+  button: {fileID: 0}
 --- !u!114 &998287008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3022,7 +3026,7 @@ MonoBehaviour:
   - {fileID: 446780537}
   - {fileID: 952491551}
   - {fileID: 752605943}
-  buttonMonsters:
+  buyButtons:
   - {fileID: 1369060408}
   - {fileID: 462611887}
   - {fileID: 1697758028}
@@ -3503,7 +3507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df206d82b00d341b18a9ad0d3e21a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: {fileID: 0}
+  monsterType: 0
+  button: {fileID: 0}
 --- !u!1001 &1513196395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4093,7 +4098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df206d82b00d341b18a9ad0d3e21a786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: {fileID: 0}
+  monsterType: 0
+  button: {fileID: 0}
 --- !u!114 &1697758029
 MonoBehaviour:
   m_ObjectHideFlags: 0

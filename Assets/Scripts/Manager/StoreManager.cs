@@ -44,12 +44,17 @@ public class StoreManager : Singleton<StoreManager>
         
         StoreLevelUpAction += StoreLevelUp;
         StoreLevelUpAction();
+    }
+
+    private void Start()
+    {
         ReRollMonster();
     }
 
     //MonsterManager에 있는 ScriptableObject의 개수에서 랜덤으로 5개(상점에 나타나는 기물 개수)
     public void ReRollMonster()
     {
+        UIManager.Instance.ButtonInteractableInit();
         for (int i = 0; i < 5; i++)
         {
             int ran = Random.Range(0, 100);
@@ -90,12 +95,7 @@ public class StoreManager : Singleton<StoreManager>
                 index++;
             }
         }
-        Debug.Log(index);
         int ran = Random.Range(0, totalMonsterCount);
-        //for (int i = 0; i < indexList.Count; i++)
-        //{
-        //    Debug.Log(indexList[i]);
-        //}
         for (int i = 0; i < indexList.Count; i++)
         {
             if (ran < indexList[i])
@@ -104,18 +104,12 @@ public class StoreManager : Singleton<StoreManager>
                 break;
             }
         }
-        for (int i = 0; i < indexList.Count; i++)
-        {
-            Debug.Log(indexList[i]);
-        }
-
     }
 
     public void BuyMonster(MONSTER_TYPE monsterType)
     {
         MonsterManager.Instance.SummonMonster(typeToMonster[monsterType]);
         typeToCount[monsterType]--;
-        
     }
     //팔때 1성으로 되돌려서 풀에 집어넣기
 }
