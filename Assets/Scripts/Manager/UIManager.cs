@@ -9,7 +9,7 @@ public class UIManager : Singleton<UIManager>
     private int index = 0;
     public List<TextMeshProUGUI> storeMonsterName = new List<TextMeshProUGUI>();
     public List<Sprite> storePriceBoard = new List<Sprite>();
-    public List<Image> buttonePriceBoard = new List<Image>();
+    public List<Image> buttonPriceBoard = new List<Image>();
     public List<ButtonFunc> buyButtons = new List<ButtonFunc>();
     private Dictionary<COST_TYPE, Sprite> costToSpriteDic = new Dictionary<COST_TYPE, Sprite>();
 
@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
     //상점 정보 보여주기
     public void StoreShowInfo(Monsters monster)
     {
-        buttonePriceBoard[index].sprite = costToSpriteDic[monster.cost];
+        buttonPriceBoard[index].sprite = costToSpriteDic[monster.cost];
         storeMonsterName[index].text = monster.MonsterName;
         buyButtons[index].monsterType = monster.monsterType;
         index++;
