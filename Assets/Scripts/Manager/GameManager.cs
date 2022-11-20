@@ -12,4 +12,6 @@ public class GameManager : Singleton<GameManager>
             StoreManager.Instance.ReRollMonster();
         }
     }
+
+
 }
