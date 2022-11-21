@@ -13,6 +13,16 @@ public enum MONSTER_TYPE
     Bat, Ghost, Scorpion
 }
 
+public enum SKILL_TYPE
+{
+    
+}
+
+public enum TEAM_TYPE
+{
+    Ally, Enemy
+}
+
 [CreateAssetMenu(menuName = "ScriptableObject/Monsters")]
 public class Monsters : ScriptableObject
 {
@@ -21,6 +31,7 @@ public class Monsters : ScriptableObject
     public MONSTER_TYPE monsterType;
     public GameObject monsterprefab;
     public Sprite monsterSprite;
+    public float atkRange;
     [SerializeField] private string monsterName;
     public string MonsterName { get { return monsterName; } }
 }

@@ -36,8 +36,9 @@ public class IDleState : BaseState
 
     public override void StateUpdate()
     {
-        //Debug.Log("대기 중");
-        //스테이지 시작되면 TraceState로 상태 변환
+        if (StageManager.Instance.isFight == false) return;
+        Monster monster = hasStatable.GetObj() as Monster;
+        monster.SetState(monster.traceState);
     }
 }
 
@@ -47,7 +48,8 @@ public class TraceState : BaseState
 
     public override void StateEnter()
     {
-        Debug.Log("대기 시작");
+        
+        Debug.Log("추적 시작");
     }
 
     public override void StateExit()
@@ -59,6 +61,17 @@ public class TraceState : BaseState
     {
         //공격 범위 안으로 적이 포착되면 공격상태로 변경
         //스테이지 내에 적이 없으면 Idle상태로 전환
+        Monster monster = hasStatable.GetObj() as Monster;
+        Collider[] colliders = Physics.OverlapSphere(monster.transform.position, monster.detectRadius, 1 << LayerMask.NameToLayer("Monster"));
+        if (colliders.Length <= 0) return;
+        TEAM_TYPE teamType = monster.teamType;
+        if (teamType == colliders[0].GetComponent<Monster>().teamType) return;
+        monster.transform.LookAt(colliders[0].transform);
+        if (teamType == TEAM_TYPE.Ally) return;
+        monster.cha.Move((colliders[0].transform.position - monster.transform.position).normalized * Time.deltaTime);
+        monster.animator.Play("Walk");
+        if ((colliders[0].transform.position - monster.transform.position).sqrMagnitude < monster.attackRange)
+            monster.SetState(monster.attackState);
     }
 }
 
@@ -78,7 +91,8 @@ public class AttackState : BaseState
 
     public override void StateUpdate()
     {
-        Debug.Log("공격 중");
+        Monster monster = hasStatable.GetObj() as Monster;
+        monster.animator.Play("Attack");
         //공격하다가 공격범위를 나가거나 상대가 죽으면 Trace 상태로 변경
         //마나가 다 차면 AttackState를 스킬 어택 스테이트로 전략패턴 넣기
         //스킬 어택 스테이트는 단일 / 범위 / 힐 / CC

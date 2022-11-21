@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3656633084182517874}
   - component: {fileID: 3656633084182517884}
-  - component: {fileID: 3656633084182517887}
+  - component: {fileID: 4901580843191931661}
   m_Layer: 3
   m_Name: Bat
   m_TagString: Untagged
@@ -50,7 +50,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3656633084182517887
+--- !u!114 &4901580843191931661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3656633084182517875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57196a78d6fac49819e8607fb57768ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 676c0e2e1c6484420aaf8fb9ef6c8602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monsterType: 0

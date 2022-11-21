@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
+public class Monster : MonoBehaviour, IHasStatable, IPoolingable
 {
-    protected IState currentState;
-    protected IState idleState;
-    protected IState traceState;
-    protected IState attackState;
-    protected IState dieState;
-    public MONSTER_TYPE monsterType;
+    public IState currentState;
+    public IState idleState;
+    public IState traceState;
+    public IState attackState;
+    public IState dieState;
+    public TEAM_TYPE teamType;
     public ObjectPool home { get ; set; }
-    public int upgradeCount = 1;
+    public float detectRadius;
+    public float attackRange;
+    public Animator animator;
+    public CharacterController cha;
     private float hp;
     public float HP
     {
@@ -25,13 +28,16 @@ public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
             }
         }
     }
-    private void Awake()
+
+    protected void Awake()
     {
         idleState = new IDleState(this);
         attackState = new AttackState(this);
         dieState = new DieState(this);
         traceState = new TraceState(this);
+        
         SetState(idleState);
+
     }
 
 

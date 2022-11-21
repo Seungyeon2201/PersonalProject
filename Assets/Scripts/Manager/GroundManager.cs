@@ -47,10 +47,10 @@ public class GroundManager : Singleton<GroundManager>
             RaycastHit hit;
             if (Physics.Raycast(grounds[i].transform.position, grounds[i].transform.up, out hit, 10f))
             {
-                Monster monster = hit.transform.GetComponent<Monster>();
-                if (hit.transform.GetComponent<Monster>().monsterType == monsterTYPE)
+                Ally monster = hit.transform.GetComponent<Ally>();
+                if (hit.transform.GetComponent<Ally>().monsterType == monsterTYPE)
                 {
-                    if(hit.transform.GetComponent<Monster>().upgradeCount == upgradeCount)
+                    if(hit.transform.GetComponent<Ally>().upgradeCount == upgradeCount)
                     {
                         MonsterManager.Instance.ReturnPool(hit.transform.gameObject);
                         grounds[i].filledMonster = false;

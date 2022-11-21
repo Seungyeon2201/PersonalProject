@@ -12,7 +12,7 @@ public class StoreManager : Singleton<StoreManager>
     public Dictionary<MONSTER_TYPE, Monsters> typeToMonster = new Dictionary<MONSTER_TYPE, Monsters>();
     public List<Monsters> monsterScriptable = new List<Monsters>();
     private Monsters sellMonsterInfo;
-    private Monster sellMonster;
+    private Ally sellMonster;
     private float oneCost;
     private float twoCost;
     private float threeCost;
@@ -127,7 +127,7 @@ public class StoreManager : Singleton<StoreManager>
     //몬스터를 팔 때 upgradeCount를 통해 몬스터 기물을 파악하여 판매(1성 1마리, 2성 3마리, 3성 9마리)
     public void SellMonster(GameObject monsterObject)
     {
-        sellMonster = monsterObject.GetComponent<Monster>();
+        sellMonster = monsterObject.GetComponent<Ally>();
         float floatUpgradeCount = sellMonster.upgradeCount;
         int monsterCount = (int)Mathf.Pow(3f, (floatUpgradeCount - 1));
         typeToCount[sellMonster.monsterType] += monsterCount;

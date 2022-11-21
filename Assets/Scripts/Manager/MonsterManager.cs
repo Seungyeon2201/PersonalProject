@@ -30,7 +30,7 @@ public class MonsterManager : Singleton<MonsterManager>
         if (!monsterDic.ContainsKey(monsters.monsterType)) return this.transform;
         monsterPool = monsterDic[monsters.monsterType];
         Vector3 position = GroundManager.Instance.FindBlank();
-        monsterPool.Call(position, Quaternion.Euler(0, 180, 0)).TryGetComponent(out Monster monster);
+        monsterPool.Call(position, Quaternion.Euler(0, 180, 0)).TryGetComponent(out Ally monster);
         monsterCountDic[monsters.monsterType]++;
         if(monsterCountDic[monsters.monsterType] == 3)
         {
@@ -45,7 +45,7 @@ public class MonsterManager : Singleton<MonsterManager>
         Transform transform = monsterPool.Call(position, Quaternion.Euler(0, 180, 0));
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
-        transform.GetComponent<Monster>().upgradeCount++;
+        transform.GetComponent<Ally>().upgradeCount++;
 
         monsterStarDic[monsterType]++;
         if (monsterStarDic[monsterType] == 3)
@@ -60,7 +60,7 @@ public class MonsterManager : Singleton<MonsterManager>
     public void UpgradeFinalMonster(MONSTER_TYPE monsterType, Vector3 position)
     {
         Transform transform = monsterPool.Call(position, Quaternion.Euler(0, 180, 0));
-        transform.GetComponent<Monster>().upgradeCount = 3;
+        transform.GetComponent<Ally>().upgradeCount = 3;
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(2).gameObject.SetActive(true);
     }
@@ -73,7 +73,7 @@ public class MonsterManager : Singleton<MonsterManager>
             if(i == 0) gameObject.transform.GetChild(i).gameObject.SetActive(true);
             else gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
-        gameObject.GetComponent<Monster>().upgradeCount = 1;
-        gameObject.GetComponent<Monster>().home.Return(gameObject);
+        gameObject.GetComponent<Ally>().upgradeCount = 1;
+        gameObject.GetComponent<Ally>().home.Return(gameObject);
     }
 }

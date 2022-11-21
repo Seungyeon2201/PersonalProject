@@ -74,6 +74,10 @@ public class GameManager : Singleton<GameManager>
             //최고 레벨 예외처리 하기
             BuyExp();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StageManager.Instance.isFight = true;
+        }
     }
 
     public void BuyExp() //LevelUp 버튼 만들면 추가
