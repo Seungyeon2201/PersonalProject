@@ -59,7 +59,7 @@ public class TraceState : BaseState
 
     public override void StateUpdate()
     {
-        //공격 범위 안으로 적이 포착되면 공격상태로 변경
+        //공격 범위 안으로 적이 포착되면 공격상태로 변경.
         //스테이지 내에 적이 없으면 Idle상태로 전환
         Monster monster = hasStatable.GetObj() as Monster;
         Collider[] colliders = Physics.OverlapSphere(monster.transform.position, monster.detectRadius, 1 << LayerMask.NameToLayer("Monster"));
