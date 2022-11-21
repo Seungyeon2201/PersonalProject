@@ -13,17 +13,11 @@ public class GroundManager : Singleton<GroundManager>
 {
     public UnityAction groundAction;
     public Ground[] grounds;
-    public Renderer[] grounds2;
-    public Material mat;
     private Vector3 offSetHight = new Vector3 (0f, 1f, 0f);
 
     private void Awake()
     {
         CategorizeGround();
-        for (int i = 0; i < grounds2.Length; i++)
-        {
-            grounds2[i].material = mat;
-        }
     }
 
     public void Select()
@@ -44,6 +38,7 @@ public class GroundManager : Singleton<GroundManager>
         return grounds[0].transform.position + offSetHight;
     }
 
+    //몬스터 합성
     public Vector3 ReturnMonster(MONSTER_TYPE monsterTYPE, int upgradeCount)
     {
         int index = -1;
@@ -61,6 +56,8 @@ public class GroundManager : Singleton<GroundManager>
                         grounds[i].filledMonster = false;
                         if(index < 0)
                         index = i;
+                        if (grounds[i].groundType == GROUND_TYPE.FightSeat)
+                            GameManager.Instance.CurPopulation--;
                     }
                 }
             }
@@ -68,6 +65,7 @@ public class GroundManager : Singleton<GroundManager>
         return grounds[index].transform.position + offSetHight;
     }
 
+    //대기석과 싸우는 필드를 열거형으로 나눔
     public void CategorizeGround()
     {
         for (int i = 0; i < 8; i++)

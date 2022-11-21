@@ -45,6 +45,7 @@ public class Grabber : Singleton<Grabber>
                     {
                         if(!hit.transform.GetComponent<Ground>().filledMonster)
                         {
+                            if (!(GameManager.Instance.CurPopulation < GameManager.Instance.totalPopulation)) return;
                             selectedObject.transform.position = hit.transform.position + offSetHight;
                             selectedObject = null;
                             GroundManager.Instance.Select();
