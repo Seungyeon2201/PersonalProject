@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467acdf1d3b2b4ca484c232ec7e9797e, type: 3}
-  m_Name: LevelTwoStore
+  m_Script: {fileID: 11500000, guid: ff2b5ca1320b445f8a69943d09c58b57, type: 3}
+  m_Name: MoneySetting
   m_EditorClassIdentifier: 
-  oneCost: 75
-  twoCost: 25
+  getMoneyPerStage: 02000000030000000400000005000000
+  getMoneyPerWin: 010000000200000003000000
+  getMoneyPerMoney: 0100000002000000030000000400000005000000
+  reRollMoney: 2
+  buyExpMoney: 4

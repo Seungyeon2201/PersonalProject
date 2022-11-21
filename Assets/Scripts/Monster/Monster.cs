@@ -25,13 +25,6 @@ public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
             }
         }
     }
-
-
-    public object GetObj()
-    {
-        return this; //박싱 - 언박싱을 위해
-    }
-
     private void Awake()
     {
         idleState = new IDleState(this);
@@ -40,6 +33,13 @@ public class Monster : MonoBehaviour, IHasStatable, IGrabable, IPoolingable
         traceState = new TraceState(this);
         SetState(idleState);
     }
+
+
+    public object GetObj()
+    {
+        return this; //박싱 - 언박싱을 위해
+    }
+
 
     private void Update()
     {

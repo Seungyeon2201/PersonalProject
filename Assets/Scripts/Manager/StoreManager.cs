@@ -7,18 +7,18 @@ using System.Net.NetworkInformation;
 
 public class StoreManager : Singleton<StoreManager>
 {
-    public Store[] storeProbability;
+    public Store storeProbability;
     private Dictionary<MONSTER_TYPE, int> typeToCount = new Dictionary<MONSTER_TYPE, int>();
-    private Dictionary<MONSTER_TYPE, Monsters> typeToMonster = new Dictionary<MONSTER_TYPE, Monsters>();
+    public Dictionary<MONSTER_TYPE, Monsters> typeToMonster = new Dictionary<MONSTER_TYPE, Monsters>();
     public List<Monsters> monsterScriptable = new List<Monsters>();
     private Monsters sellMonsterInfo;
     private Monster sellMonster;
     private float oneCost;
     private float twoCost;
     private float threeCost;
-    private int storeLevel = 0;
+    public int storeLevel = 0;
     private COST_TYPE pickCostType;
-    public UnityAction StoreLevelUpAction;
+    
     List<int> indexList = new List<int>();
     private Dictionary<int, MONSTER_TYPE> indexToMonster = new Dictionary<int, MONSTER_TYPE>();
     private void Awake()
@@ -44,8 +44,8 @@ public class StoreManager : Singleton<StoreManager>
                 typeToCount.Add(monsterScriptable[i].monsterType, 9);
             }
         }
-        StoreLevelUpAction += StoreLevelUp;
-        StoreLevelUpAction();
+        GameManager.Instance.storeLevelUpAction += StoreLevelUp;
+        SetStoreProbability();
     }
 
     private void Start()
@@ -56,7 +56,9 @@ public class StoreManager : Singleton<StoreManager>
     //MonsterManager에 있는 ScriptableObject의 개수에서 랜덤으로 5개(상점에 나타나는 기물 개수)
     public void ReRollMonster()
     {
+        if (GameManager.Instance.Gold < GameManager.Instance.moneySetting.reRollMoney) return;
         UIManager.Instance.ButtonInteractableInit();
+        GameManager.Instance.Gold -= GameManager.Instance.moneySetting.reRollMoney;
         for (int i = 0; i < 5; i++)
         {
             int ran = Random.Range(0, 100);
@@ -69,15 +71,16 @@ public class StoreManager : Singleton<StoreManager>
 
     public void StoreLevelUp()
     {
+        storeLevel++;
         SetStoreProbability();
+        GameManager.Instance.LevelUp();
     }
 
     //상점 레벨에 따른 Cost Type별 확률 세팅
     public void SetStoreProbability()
     {
-        storeLevel++;
-        oneCost = storeProbability[storeLevel - 1].OneCost;
-        twoCost = storeProbability[storeLevel - 1].TwoCost;
+        oneCost = storeProbability.ReRollProbs[storeLevel].OneCost;
+        twoCost = storeProbability.ReRollProbs[storeLevel].OneCost;
         threeCost = 100 - oneCost - twoCost;
         Debug.Log(oneCost + "/" + twoCost + "/" + threeCost);
     }
@@ -115,8 +118,10 @@ public class StoreManager : Singleton<StoreManager>
     //몬스터 구매시 해당 몬스터 타입을 소환하고 기물의 개수 줄이기
     public void BuyMonster(MONSTER_TYPE monsterType)
     {
+        if (GameManager.Instance.Gold < (int)typeToMonster[monsterType].cost) return;
         MonsterManager.Instance.SummonMonster(typeToMonster[monsterType]);
         typeToCount[monsterType]--;
+        GameManager.Instance.Gold -= (int)typeToMonster[monsterType].cost;
     }
     
     //몬스터를 팔 때 upgradeCount를 통해 몬스터 기물을 파악하여 판매(1성 1마리, 2성 3마리, 3성 9마리)
@@ -124,10 +129,11 @@ public class StoreManager : Singleton<StoreManager>
     {
         sellMonster = monsterObject.GetComponent<Monster>();
         float floatUpgradeCount = sellMonster.upgradeCount;
-        typeToCount[sellMonster.monsterType] += (int)Mathf.Pow(3f, (floatUpgradeCount - 1));
-
+        int monsterCount = (int)Mathf.Pow(3f, (floatUpgradeCount - 1));
+        typeToCount[sellMonster.monsterType] += monsterCount;
+        GameManager.Instance.Gold += (int)typeToMonster[sellMonster.monsterType].cost * monsterCount;
         //MonsterManager가 가지고 있는 기물 정보에 관한 Dictionary 갱신
-        if(sellMonster.upgradeCount == 1)
+        if (sellMonster.upgradeCount == 1)
         {
             MonsterManager.Instance.monsterCountDic[sellMonster.monsterType]--;
         }

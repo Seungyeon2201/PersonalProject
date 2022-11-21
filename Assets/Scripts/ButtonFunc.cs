@@ -14,6 +14,7 @@ public class ButtonFunc : MonoBehaviour
     //몬스터 사면 몬스터 소환 및 버튼 비활성화
     public void Buy()
     {
+        if (GameManager.Instance.Gold < (int)StoreManager.Instance.typeToMonster[monsterType].cost) return;
         StoreManager.Instance.BuyMonster(monsterType);
         button.interactable = false;
     }

@@ -9,6 +9,8 @@ public class Ground : MonoBehaviour
     public bool isPlayerGround;
     public GameObject tile;
     public Transform monsterTran;
+    public GROUND_TYPE groundType;
+
     private void Awake()
     {
         if (isPlayerGround)
@@ -30,15 +32,20 @@ public class Ground : MonoBehaviour
         }
     }
 
+    //내 몬스터랑 적 몬스터 구분하기
     private void OnTriggerEnter(Collider other)
     {
         monsterTran = other.gameObject.transform;
         filledMonster = true;
+        if (groundType == GROUND_TYPE.FightSeat)
+            GameManager.Instance.CurPopulation++;
     }
 
     private void OnTriggerExit(Collider other)
     {
         filledMonster = false;
+        if (groundType == GROUND_TYPE.FightSeat)
+            GameManager.Instance.CurPopulation--;
     }
 
     public void ChangePosition(Vector3 selectPosition)
@@ -46,8 +53,4 @@ public class Ground : MonoBehaviour
         monsterTran.position = selectPosition;
     }
 
-    public void ChangeTile()
-    {
-
-    }
 }

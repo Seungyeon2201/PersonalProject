@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467acdf1d3b2b4ca484c232ec7e9797e, type: 3}
-  m_Name: LevelThreeStore
+  m_Script: {fileID: 11500000, guid: dd5c24888db1d4293af0ea55b3060d72, type: 3}
+  m_Name: LevelExperience
   m_EditorClassIdentifier: 
-  oneCost: 55
-  twoCost: 30
+  needExperience: 0200000002000000060000000a00000014000000240000003800000050000000
+  getExperiencePerStage: 2
+  pushLevelUp: 4

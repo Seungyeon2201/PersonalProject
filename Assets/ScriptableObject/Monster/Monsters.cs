@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum COST_TYPE
 {
-    One, Two ,Three
+    One = 1, Two = 2, Three = 3
 }
 
 public enum MONSTER_TYPE
@@ -19,6 +20,7 @@ public class Monsters : ScriptableObject
     public COST_TYPE cost;
     public MONSTER_TYPE monsterType;
     public GameObject monsterprefab;
+    public Sprite monsterSprite;
     [SerializeField] private string monsterName;
     public string MonsterName { get { return monsterName; } }
 }

@@ -4,11 +4,27 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum GROUND_TYPE
+{
+    WaitingSeat, FightSeat
+}
+
 public class GroundManager : Singleton<GroundManager>
 {
     public UnityAction groundAction;
     public Ground[] grounds;
+    public Renderer[] grounds2;
+    public Material mat;
     private Vector3 offSetHight = new Vector3 (0f, 1f, 0f);
+
+    private void Awake()
+    {
+        CategorizeGround();
+        for (int i = 0; i < grounds2.Length; i++)
+        {
+            grounds2[i].material = mat;
+        }
+    }
 
     public void Select()
     {
@@ -19,7 +35,7 @@ public class GroundManager : Singleton<GroundManager>
     {
         for (int i = 0; i < grounds.Length; i++)
         {
-            int index = i;
+            //int index = i;
             if (grounds[i].filledMonster == false)
             {
                 return grounds[i].transform.position + offSetHight;
@@ -49,7 +65,39 @@ public class GroundManager : Singleton<GroundManager>
                 }
             }
         }
-        Debug.Log(index);
         return grounds[index].transform.position + offSetHight;
     }
+
+    public void CategorizeGround()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            grounds[i].groundType = GROUND_TYPE.WaitingSeat;
+        }
+        for(int i = 8; i< grounds.Length; i++)
+        {
+            grounds[i].groundType = GROUND_TYPE.FightSeat;
+        }
+    }
+
+    //public int CheckPopulation()
+    //{
+    //    int population = 0;
+    //    for (int i = 0; i < grounds.Length; i++)
+    //    {
+    //        if (grounds[i].groundType == GROUND_TYPE.FightSeat)
+    //        {
+    //            RaycastHit hit;
+    //            if(Physics.Raycast(grounds[i].transform.position,transform.up, out hit, 1f))
+    //            {
+    //                if(hit.transform.TryGetComponent<Monster>(out Monster monster))
+    //                {
+    //                    population++;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    GameManager.Instance.CurPopulation = population;
+    //    return population;
+    //}
 }

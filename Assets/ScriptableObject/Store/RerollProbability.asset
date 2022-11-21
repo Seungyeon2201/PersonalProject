@@ -10,7 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 467acdf1d3b2b4ca484c232ec7e9797e, type: 3}
-  m_Name: LevelOneStore
+  m_Name: RerollProbability
   m_EditorClassIdentifier: 
-  oneCost: 33
-  twoCost: 33
+  reRollProbs:
+  - oneCost: 30
+    twoCost: 30
+  - oneCost: 68.6
+    twoCost: 39.4
+  - oneCost: 23.4
+    twoCost: 71.3
+  - oneCost: 92
+    twoCost: 30
+  - oneCost: 30
+    twoCost: 30
+  - oneCost: 30
+    twoCost: 30
+  - oneCost: 30
+    twoCost: 30
+  - oneCost: 30
+    twoCost: 30
+  - oneCost: 30
+    twoCost: 30

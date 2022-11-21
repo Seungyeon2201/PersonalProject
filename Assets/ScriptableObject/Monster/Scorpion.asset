@@ -15,4 +15,5 @@ MonoBehaviour:
   cost: 2
   monsterType: 2
   monsterprefab: {fileID: 221399106011251419, guid: 5933afdbcf12c4d15b0a2812b687adcf, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 56bc0fce233914361bd70294bc8405ed, type: 3}
   monsterName: Scorpion

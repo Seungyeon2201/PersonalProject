@@ -50,7 +50,7 @@ public class Grabber : Singleton<Grabber>
                             GroundManager.Instance.Select();
                         }
                         else
-                        {
+                        {   //자리 바꾸기
                             hit.transform.GetComponent<Ground>().ChangePosition(SelectPosition);
                             selectedObject.transform.position = hit.collider.transform.position + offSetHight;
                             selectedObject = null;
