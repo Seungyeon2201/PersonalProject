@@ -46,7 +46,7 @@ public class MonsterManager : Singleton<MonsterManager>
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
         transform.GetComponent<Ally>().upgradeCount++;
-
+        transform.GetComponent<Ally>().teamType = TEAM_TYPE.Ally;
         monsterStarDic[monsterType]++;
         if (monsterStarDic[monsterType] == 3)
         {
@@ -61,6 +61,7 @@ public class MonsterManager : Singleton<MonsterManager>
     {
         Transform transform = monsterPool.Call(position, Quaternion.Euler(0, 180, 0));
         transform.GetComponent<Ally>().upgradeCount = 3;
+        transform.GetComponent<Ally>().teamType = TEAM_TYPE.Ally;
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(2).gameObject.SetActive(true);
     }

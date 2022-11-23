@@ -98,4 +98,23 @@ public class GroundManager : Singleton<GroundManager>
     //    GameManager.Instance.CurPopulation = population;
     //    return population;
     //}
+    public void SetMonterToFight()
+    {
+        for(int i = 0; i < grounds.Length;i++)
+        {
+            if (grounds[i].groundType == GROUND_TYPE.WaitingSeat && grounds[i].filledMonster == true)
+            {
+                for(int j = 0; j < grounds.Length; j++)
+                {
+                    if (grounds[j].groundType == GROUND_TYPE.FightSeat && grounds[j].filledMonster == false)
+                    {
+                        grounds[j].filledMonster = true;
+                        grounds[i].filledMonster = false;
+                        grounds[i].monsterTran.position = grounds[j].transform.position + offSetHight;
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }

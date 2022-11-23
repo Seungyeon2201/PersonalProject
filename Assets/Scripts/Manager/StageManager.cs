@@ -16,6 +16,15 @@ public class StageManager : Singleton<StageManager>
 
     public void StartBattle()
     {
+        if(GameManager.Instance.CurPopulation < GameManager.Instance.totalPopulation)
+        {
+            for (int i = GameManager.Instance.CurPopulation; i < GameManager.Instance.totalPopulation; i++)
+            {
+                Debug.Log(GameManager.Instance.CurPopulation + " / " + GameManager.Instance.totalPopulation);
+                GroundManager.Instance.SetMonterToFight();
+            }
+        }
+        
         isFight = true;
     }
 
