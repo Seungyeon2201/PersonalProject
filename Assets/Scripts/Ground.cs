@@ -38,14 +38,23 @@ public class Ground : MonoBehaviour
         monsterTran = other.gameObject.transform;
         filledMonster = true;
         if (groundType == GROUND_TYPE.FightSeat)
+        {
             GameManager.Instance.CurPopulation++;
+            other.GetComponent<Ally>().canFight = true;
+            Debug.Log(other.GetComponent<Ally>().canFight);
+        }
+            
     }
 
     private void OnTriggerExit(Collider other)
     {
         filledMonster = false;
         if (groundType == GROUND_TYPE.FightSeat)
+        {
             GameManager.Instance.CurPopulation--;
+            other.GetComponent<Ally>().canFight = false;
+        }
+            
     }
 
     public void ChangePosition(Vector3 selectPosition)

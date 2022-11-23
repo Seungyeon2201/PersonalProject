@@ -74,6 +74,7 @@ public class MonsterManager : Singleton<MonsterManager>
             else gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
         gameObject.GetComponent<Ally>().upgradeCount = 1;
+        gameObject.GetComponent<Ally>().canFight = false;
         gameObject.GetComponent<Ally>().home.Return(gameObject);
     }
 }

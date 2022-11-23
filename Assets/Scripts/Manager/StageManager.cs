@@ -8,17 +8,20 @@ public class StageManager : Singleton<StageManager>
     public UnityAction endBattleAction;
     public bool isFight = false;
 
+    private void Awake()
+    {
+        startBattleAction += StartBattle;
+        endBattleAction += EndBattle;
+    }
 
     public void StartBattle()
     {
         isFight = true;
-        startBattleAction();
     }
 
     public void EndBattle()
     {
         isFight = false;
-        endBattleAction();
     }
 
 }

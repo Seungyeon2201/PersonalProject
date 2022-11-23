@@ -12,6 +12,9 @@ public class GameManager : Singleton<GameManager>
     public UnityAction goldAction;
     public UnityAction storeLevelUpAction;
     public UnityAction pupulationAction;
+    public int needExp;
+    public int totalPopulation = 1;
+    private bool tempBool = false;
     [SerializeField]
     private int gold;
     public int Gold
@@ -23,8 +26,6 @@ public class GameManager : Singleton<GameManager>
             goldAction();
         }
     }
-    //private int hp = 50;
-    //public int Hp { get { return hp; } }
     private int curPopulation = 0;
     public int CurPopulation
     {
@@ -35,7 +36,6 @@ public class GameManager : Singleton<GameManager>
             pupulationAction();
         }
     }
-    public int totalPopulation = 1;
     private int curExp = 0;
     public int CurExp
     {
@@ -54,8 +54,7 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-    public int needExp;
-
+    
     //매 라운드 시작시 획득하는 기본골드 2라 2골 3 2골 4 3골드 2-1 4골드 나머지 5골드
 
     private void Awake()
@@ -76,7 +75,16 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StageManager.Instance.isFight = true;
+            if(tempBool == false)
+            {
+                StageManager.Instance.startBattleAction();
+                tempBool = true;
+            }
+            else
+            {
+                StageManager.Instance.endBattleAction();
+                tempBool = false;
+            }
         }
     }
 

@@ -6,6 +6,7 @@ public class Ally : Monster, IGrabable
 {
     public MONSTER_TYPE monsterType;
     public int upgradeCount = 1;
+    
 
     private new void Awake()
     {
