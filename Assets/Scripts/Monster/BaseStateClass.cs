@@ -89,13 +89,19 @@ public class TraceState : BaseState
         {
             if (colliders[i].GetComponent<Monster>().canFight == false) continue;
             if (colliders[i].GetComponent<Monster>().teamType == monster.teamType) continue;
-            //isFindTarget = true;
+            isFindTarget = true;
             temp = i;
         }
-        Debug.Log(temp);
-        if (colliders[temp] == null)
+        if (isFindTarget == false)
         {
-            StageManager.Instance.endBattleAction();
+            monster.detectRadius++;
+            if(monster.detectRadius > 7)
+            {
+                monster.detectRadius = detectRaduis;
+                StageManager.Instance.isFight = false;
+            }
+            monster.SetState(monster.idleState);
+            return;
         }
         monster.transform.LookAt(colliders[temp].transform);
         monster.characterController.Move((colliders[temp].transform.position - monster.transform.position).normalized * Time.deltaTime);
