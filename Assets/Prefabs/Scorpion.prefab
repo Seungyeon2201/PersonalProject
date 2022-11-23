@@ -62,6 +62,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676c0e2e1c6484420aaf8fb9ef6c8602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamType: 0
+  detectRadius: 3
+  attackRange: 2
+  animator: {fileID: 0}
+  characterController: {fileID: 0}
+  canFight: 0
   monsterType: 2
   upgradeCount: 1
 --- !u!1001 &1606993584875441278

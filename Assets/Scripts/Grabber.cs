@@ -43,12 +43,18 @@ public class Grabber : Singleton<Grabber>
                 {
                     if (hit.transform.gameObject.layer == groundLayer && hit.transform.GetComponent<Ground>().isPlayerGround)
                     {
-                        if(!hit.transform.GetComponent<Ground>().filledMonster)
+                        if (!hit.transform.GetComponent<Ground>().filledMonster)
                         {
-                            if (!(GameManager.Instance.CurPopulation < GameManager.Instance.totalPopulation)) return;
-                            selectedObject.transform.position = hit.transform.position + offSetHight;
-                            selectedObject = null;
-                            GroundManager.Instance.Select();
+                            if (GameManager.Instance.CurPopulation < GameManager.Instance.totalPopulation || hit.transform.GetComponent<Ground>().groundType == GROUND_TYPE.WaitingSeat)
+                            {
+                                selectedObject.transform.position = hit.transform.position + offSetHight;
+                                selectedObject = null;
+                                GroundManager.Instance.Select();
+                            }
+                            else
+                            {
+                                    return;
+                            }
                         }
                         else
                         {   //자리 바꾸기
