@@ -31,7 +31,6 @@ public class Monsters : ScriptableObject
     public MONSTER_TYPE monsterType;
     public GameObject monsterprefab;
     public Sprite monsterSprite;
-    public float atkRange;
     [SerializeField] private string monsterName;
     public string MonsterName { get { return monsterName; } }
 }

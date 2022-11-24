@@ -82,7 +82,6 @@ public class StoreManager : Singleton<StoreManager>
         oneCost = storeProbability.ReRollProbs[storeLevel].OneCost;
         twoCost = storeProbability.ReRollProbs[storeLevel].OneCost;
         threeCost = 100 - oneCost - twoCost;
-        Debug.Log(oneCost + "/" + twoCost + "/" + threeCost);
     }
 
     //Cost Type내에 있는 몬스터의 종류를 찾고 기물의 개수를 비교하여 랜덤으로 뽑기

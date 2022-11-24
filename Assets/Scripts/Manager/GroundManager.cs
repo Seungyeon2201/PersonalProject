@@ -45,12 +45,12 @@ public class GroundManager : Singleton<GroundManager>
         for (int i = 0; i < grounds.Length; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(grounds[i].transform.position, grounds[i].transform.up, out hit, 10f))
+            if (Physics.Raycast(grounds[i].transform.position, grounds[i].transform.up, out hit, 10f, 1<<LayerMask.NameToLayer("Monster")))
             {
                 Ally monster = hit.transform.GetComponent<Ally>();
-                if (hit.transform.GetComponent<Ally>().monsterType == monsterTYPE)
+                if (monster.monsterType == monsterTYPE)
                 {
-                    if(hit.transform.GetComponent<Ally>().upgradeCount == upgradeCount)
+                    if(monster.upgradeCount == upgradeCount)
                     {
                         MonsterManager.Instance.ReturnPool(hit.transform.gameObject);
                         grounds[i].filledMonster = false;
@@ -78,26 +78,6 @@ public class GroundManager : Singleton<GroundManager>
         }
     }
 
-    //public int CheckPopulation()
-    //{
-    //    int population = 0;
-    //    for (int i = 0; i < grounds.Length; i++)
-    //    {
-    //        if (grounds[i].groundType == GROUND_TYPE.FightSeat)
-    //        {
-    //            RaycastHit hit;
-    //            if(Physics.Raycast(grounds[i].transform.position,transform.up, out hit, 1f))
-    //            {
-    //                if(hit.transform.TryGetComponent<Monster>(out Monster monster))
-    //                {
-    //                    population++;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    GameManager.Instance.CurPopulation = population;
-    //    return population;
-    //}
     public void SetMonterToFight()
     {
         for(int i = 0; i < grounds.Length;i++)
@@ -110,6 +90,7 @@ public class GroundManager : Singleton<GroundManager>
                     {
                         grounds[j].filledMonster = true;
                         grounds[i].filledMonster = false;
+                        grounds[i].monsterTran.GetComponent<Monster>().canFight = true;
                         grounds[i].monsterTran.position = grounds[j].transform.position + offSetHight;
                         return;
                     }
