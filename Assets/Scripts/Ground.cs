@@ -35,26 +35,31 @@ public class Ground : MonoBehaviour
     //내 몬스터랑 적 몬스터 구분하기
     private void OnTriggerEnter(Collider other)
     {
-        monsterTran = other.gameObject.transform;
-        filledMonster = true;
-        if (groundType == GROUND_TYPE.FightSeat)
+        if(other.GetComponent<Monster>() != null)
         {
-            GameManager.Instance.CurPopulation++;
-            other.GetComponent<Ally>().canFight = true;
-            Debug.Log(other.GetComponent<Ally>().canFight);
-        }
-            
+            monsterTran = other.gameObject.transform;
+            filledMonster = true;
+            if (groundType == GROUND_TYPE.FightSeat && other.GetComponent<Monster>().teamType == TEAM_TYPE.Ally)
+            {
+                GameManager.Instance.CurPopulation++;
+                other.GetComponent<Ally>().canFight = true;
+            }
+        }  
     }
 
     private void OnTriggerExit(Collider other)
     {
-        filledMonster = false;
-        if (groundType == GROUND_TYPE.FightSeat)
+        if (other.GetComponent<Monster>() != null)
         {
-            GameManager.Instance.CurPopulation--;
-            other.GetComponent<Ally>().canFight = false;
+            filledMonster = false;
+            if (groundType == GROUND_TYPE.FightSeat && other.GetComponent<Monster>().teamType == TEAM_TYPE.Ally)
+            {
+                GameManager.Instance.CurPopulation--;
+                other.GetComponent<Ally>().canFight = false;
+            }
         }
-            
+
+
     }
 
     public void ChangePosition(Vector3 selectPosition)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using System;
 using System.Reflection;
 
@@ -10,7 +11,7 @@ public class Grabber : Singleton<Grabber>
     public GameObject selectedObject;
     private int groundLayer;
     private Vector3 offSetHight = new Vector3(0f, 1f, 0f);
-    public Vector3 SelectPosition;
+    public Vector3 selectPosition;
 
     private void Awake()
     {
@@ -31,9 +32,11 @@ public class Grabber : Singleton<Grabber>
             if (selectedObject == null)
             {
                 hit = GrabRay();
-                if (!hit.transform.TryGetComponent(out IGrabable grabable)) return;
+                if (hit.transform == null)  return;
+                //if (!hit.transform.TryGetComponent(out IGrabable grabable)) return;
                 selectedObject = hit.collider.gameObject;
-                SelectPosition = selectedObject.transform.position;
+                selectPosition = selectedObject.transform.position;
+                selectedObject.GetComponent<NavMeshAgent>().enabled = false;
                 GroundManager.Instance.Select(); //밑에 타일 띄우기
             }
             //마우스로 몬스터를 놓을 때
@@ -48,6 +51,7 @@ public class Grabber : Singleton<Grabber>
                             if (GameManager.Instance.CurPopulation < GameManager.Instance.totalPopulation || hit.transform.GetComponent<Ground>().groundType == GROUND_TYPE.WaitingSeat)
                             {
                                 selectedObject.transform.position = hit.transform.position + offSetHight;
+                                selectedObject.GetComponent<NavMeshAgent>().enabled = true;
                                 selectedObject = null;
                                 GroundManager.Instance.Select();
                             }
@@ -58,11 +62,13 @@ public class Grabber : Singleton<Grabber>
                         }
                         else
                         {   //자리 바꾸기
-                            hit.transform.GetComponent<Ground>().ChangePosition(SelectPosition);
+                            hit.transform.GetComponent<Ground>().ChangePosition(selectPosition);
                             selectedObject.transform.position = hit.collider.transform.position + offSetHight;
+                            selectedObject.GetComponent<NavMeshAgent>().enabled = true;
                             selectedObject = null;
                             GroundManager.Instance.Select();
-                        }    
+                        }
+                        
                     }
                 }
 
@@ -88,7 +94,7 @@ public class Grabber : Singleton<Grabber>
         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
-        Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, Mathf.Infinity) ;
+        Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, Mathf.Infinity, 1<< LayerMask.NameToLayer("Monster")) ;
         return hit;
     }
 
