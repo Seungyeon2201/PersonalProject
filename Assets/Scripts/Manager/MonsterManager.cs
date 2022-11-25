@@ -37,6 +37,7 @@ public class MonsterManager : Singleton<MonsterManager>
             UpgradeMonster(monsters.monsterType, GroundManager.Instance.ReturnMonster(monsters.monsterType, 1));
             monsterCountDic[monsters.monsterType] = 0;
         }
+        //monster.atkDamage = monsters.AtkDamage;
         return monster.transform;
     }
     //2성 몬스터 소환

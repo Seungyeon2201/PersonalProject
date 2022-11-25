@@ -33,4 +33,8 @@ public class Monsters : ScriptableObject
     public Sprite monsterSprite;
     [SerializeField] private string monsterName;
     public string MonsterName { get { return monsterName; } }
+    [SerializeField] private float atkDamage;
+    public float AtkDamage { get { return atkDamage; } }
+    [SerializeField] private float hp;
+    public float HP { get { return hp; } }
 }

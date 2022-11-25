@@ -17,3 +17,5 @@ MonoBehaviour:
   monsterprefab: {fileID: 3656633084182517875, guid: 31cc18b8868a940d19e9984044b76b8f, type: 3}
   monsterSprite: {fileID: 21300000, guid: 0225ec5355dba45178e78e4c436e54ff, type: 3}
   monsterName: Bat
+  atkDamage: 30
+  hp: 100

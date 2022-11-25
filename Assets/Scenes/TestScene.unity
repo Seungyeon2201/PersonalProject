@@ -356,6 +356,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 3963994360772066997, guid: ba1fdcc0a73a9452cb6629a8f6efc9dc, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963994360772066997, guid: ba1fdcc0a73a9452cb6629a8f6efc9dc, type: 3}
+      propertyPath: detectRadius
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1fdcc0a73a9452cb6629a8f6efc9dc, type: 3}
 --- !u!1001 &1244764231

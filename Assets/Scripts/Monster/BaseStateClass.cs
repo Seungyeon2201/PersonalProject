@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public enum STATE_TYPE
@@ -99,9 +100,12 @@ public class TraceState : BaseState
             return;
         }
         monster.animator.Play("Walk");
+        monster.navMeshAgent.SetDestination(colliders[temp].transform.position);
+        monster.transform.LookAt(colliders[temp].transform.position);
         if (Vector3.Distance(colliders[temp].transform.position, monster.transform.position) < monster.attackRange)
         {
             monster.detectRadius = detectRaduis;
+            monster.navMeshAgent.isStopped = true;
             monster.SetState(monster.attackState);
         }
     }
@@ -109,11 +113,22 @@ public class TraceState : BaseState
 
 public class AttackState : BaseState
 {
+    int targetIndex;
+    float animationLength;
+    float atkMoment;
+    float normalizedTime;
+    AnimatorStateInfo animatorStateInfo;
+    Monster target;
     public AttackState(IHasStatable hasStatable) : base(hasStatable) { }
     public override void StateEnter()
     {
         Debug.Log("공격 시작");
         monster = hasStatable.GetObj() as Monster;
+        monster.animator.Play("Attack");
+        animatorStateInfo = monster.animator.GetCurrentAnimatorStateInfo(0);
+        animationLength = animatorStateInfo.length;
+        atkMoment = monster.atkMoment;
+        normalizedTime = 0;
     }
 
     public override void StateExit()
@@ -123,13 +138,24 @@ public class AttackState : BaseState
 
     public override void StateUpdate()
     {
-
+        //atkMoment = monster.atkMoment;
+        animatorStateInfo = monster.animator.GetCurrentAnimatorStateInfo(0);
         Collider[] colliders = Physics.OverlapSphere(monster.transform.position, monster.attackRange, 1 << LayerMask.NameToLayer("Monster"));
-        monster.animator.Play("Attack");
-        for(int i = 0; i < colliders.Length;i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            
+            if (colliders[i].GetComponent<Monster>().canFight == false) continue;
+            if (colliders[i].GetComponent<Monster>().teamType == monster.teamType) continue;
+            targetIndex = i;
+            target = colliders[targetIndex].GetComponent<Monster>();
+            target.TakeHit(monster.atkDamage);
         }
+        
+        if (animatorStateInfo.IsName("Attack") && animatorStateInfo.normalizedTime - normalizedTime >= (animationLength * atkMoment))
+        {
+            normalizedTime = animatorStateInfo.normalizedTime;
+            target.TakeHit(monster.atkDamage);
+        }
+
         if (!(colliders.Length > 0))
         {
             monster.SetState(monster.idleState);
@@ -142,10 +168,15 @@ public class AttackState : BaseState
 
 public class DieState : BaseState
 {
+    AnimatorStateInfo animatorStateInfo;
+
     public DieState(IHasStatable hasStatable) : base(hasStatable) { }
 
     public override void StateEnter()
     {
+        monster = hasStatable.GetObj() as Monster;
+        monster.animator.Play("Die");
+        animatorStateInfo = monster.animator.GetCurrentAnimatorStateInfo(0);
         Debug.Log("죽음 시작");
     }
 
@@ -156,6 +187,9 @@ public class DieState : BaseState
 
     public override void StateUpdate()
     {
-        Debug.Log("죽는 중");
+        if(animatorStateInfo.normalizedTime > animatorStateInfo.length)
+        {
+            monster.gameObject.SetActive(false);
+        }
     }
 }

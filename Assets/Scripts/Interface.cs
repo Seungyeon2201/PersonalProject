@@ -23,3 +23,8 @@ public interface IPoolingable
 {
     public ObjectPool home { get; set; }
 }
+
+public interface IDamagable
+{
+    public void TakeHit(float damage);
+}
