@@ -17,3 +17,5 @@ MonoBehaviour:
   monsterprefab: {fileID: 3638045700264670868, guid: ba1fdcc0a73a9452cb6629a8f6efc9dc, type: 3}
   monsterSprite: {fileID: 21300000, guid: f11f8c99797f842c1b8e6c0ecbd9b761, type: 3}
   monsterName: Ghost
+  atkDamage: 10
+  hp: 100

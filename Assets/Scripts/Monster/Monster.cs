@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
-public class Monster : MonoBehaviour, IHasStatable, IPoolingable
+public class Monster : MonoBehaviour, IHasStatable, IPoolingable, IDamagable
 {
     public IState currentState;
     public IState idleState;
@@ -17,14 +17,19 @@ public class Monster : MonoBehaviour, IHasStatable, IPoolingable
     [Range(0, 10)]
     public float attackRange;
     public Animator animator;
+    public NavMeshAgent navMeshAgent;
     public bool canFight = false;
-    private float hp;
+    [Range(0,1)]
+    public float atkMoment;
+    public float atkDamage;
+    private float hp = 100;
     public float HP
     {
         get { return hp; }
         set
         {
             hp = value;
+            Debug.Log(gameObject.name + " : " + HP);
             if (hp <= 0)
             {
                 SetState(dieState);
@@ -39,6 +44,7 @@ public class Monster : MonoBehaviour, IHasStatable, IPoolingable
         dieState = new DieState(this);
         traceState = new TraceState(this);
         StageManager.Instance.endBattleAction += StageEnd; // 나중에 Ally로 옮겨야 함
+        navMeshAgent = GetComponent<NavMeshAgent>();
         SetState(idleState);
     }
 
@@ -83,4 +89,8 @@ public class Monster : MonoBehaviour, IHasStatable, IPoolingable
         
     }
 
+    public void TakeHit(float damage)
+    {
+        HP -= damage;
+    }
 }
